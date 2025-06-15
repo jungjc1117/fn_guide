@@ -1,12 +1,11 @@
-name: Create Timestamped File
+name: Run Python and Commit Output
 
 on:
-  schedule:
-    - cron: '*/1 * * * *'  # 매 1분마다 실행
-  workflow_dispatch:        # 수동 실행도 가능
+  push:
+    branches: [ "main" ]
 
 jobs:
-  build:
+  run-script:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,15 +15,16 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      - name: Run script
-        run: python run.py
+      - name: Run Python script
+        run: |
+          python run.py
 
       - name: Commit output file
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add hello_*.txt
-          git commit -m "Add timestamped hello file"
+          git add hello.txt
+          git commit -m "Add output file from GitHub Actions"
           git push
