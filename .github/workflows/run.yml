@@ -5,7 +5,7 @@ on:
     branches: [ "main" ]
 
 permissions:
-  contents: write  # commit/push하려면 필요
+  contents: write
 
 jobs:
   run-script:
@@ -29,6 +29,3 @@ jobs:
           git add output.json kiwoom_rank_viewer.html
           git commit -m "Manual run result" || echo "No changes"
           git push
-
-      - name: Run script
-        run: kiwoom_rank_viewer.html
