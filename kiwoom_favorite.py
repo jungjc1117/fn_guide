@@ -79,7 +79,7 @@ for line in sector_code_text.strip().splitlines()[1:]:  # 첫 줄 제외
 
 # 📄 데이터 파일 경로 설정
 input_file_path = "input.txt"
-output_file_path = "output.json"
+# output_file_path = "output.json"
 
 # 📥 파일 읽기
 with open(input_file_path, "r", encoding="utf-8") as f:
@@ -164,7 +164,7 @@ for r in records:
 # print(f"변환 완료: {output_file_path}")
 
 # ✅ HTML 자동 갱신도 같이 처리 (추가)
-html_path = r"kiwoom_rank_viewer.html"
+html_path = r"index.html"
 with open(html_path, "r", encoding="utf-8") as f:
     html = f.read()
 
