@@ -27,12 +27,17 @@
     <div id="output"></div>
 
     <script>
-            let stockInfoList = [];
-
-            async function loadStockInfoList() {
-                const res = await fetch('output.json');
-                stockInfoList = await res.json();
-            }
+        const stockInfoList = [
+             {
+                "업종코드": "101",
+                "종목명": "GRT",
+                "종목코드": "900290",
+                "시가총액": 2454,
+                "유통비율": 0.492,
+                "유통시총": 1207,
+                "업종내비율": 0.04108
+              }
+            ];
 
 
         const accessParams = {
