@@ -6,13 +6,16 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  run-script:
+  run-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -22,7 +25,7 @@ jobs:
       - name: Run script
         run: python kiwoom_favorite.py
 
-      - name: Commit result
+      - name: Git commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -30,3 +33,13 @@ jobs:
           git commit -m "자동 업데이트된 HTML" || echo "No changes"
           git push
 
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .  # 현재 디렉토리 (kiwoom_rank_viewer.html 포함)
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
