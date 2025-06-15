@@ -78,8 +78,8 @@ for line in sector_code_text.strip().splitlines()[1:]:  # 첫 줄 제외
     sector_code_table[(market, sector)] = code  # strip 하지 않고 그대로 등록
 
 # 📄 데이터 파일 경로 설정
-input_file_path = r"C:\Users\user\Downloads\python\64bit\npm\input.txt"
-output_file_path = r"C:\Users\user\Downloads\python\64bit\npm\output.json"
+input_file_path = "input.txt"
+output_file_path = "output.json"
 
 # 📥 파일 읽기
 with open(input_file_path, "r", encoding="utf-8") as f:
