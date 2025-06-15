@@ -157,9 +157,24 @@ for r in records:
     ratio = r["시가총액"] / total if total > 0 else 0
     r["업종내비율"] = round(ratio, 6)
 
-# 💾 JSON 저장
-with open(output_file_path, "w", encoding="utf-8") as f:
-    json.dump(records, f, ensure_ascii=False, indent=2)
-    # json.dump(records, f, ensure_ascii=False, separators=(',', ':'))
+# # 💾 JSON 저장
+# with open(output_file_path, "w", encoding="utf-8") as f:
+#     json.dump(records, f, ensure_ascii=False, indent=2)
 
-print(f"변환 완료: {output_file_path}")
+# print(f"변환 완료: {output_file_path}")
+
+# ✅ HTML 자동 갱신도 같이 처리 (추가)
+html_path = r"kiwoom_rank_viewer.html"
+with open(html_path, "r", encoding="utf-8") as f:
+    html = f.read()
+
+# stockInfoList 교체
+pattern = r"(const\s+stockInfoList\s*=\s*)(\[.*?\])"
+replacement = r"\1" + json.dumps(records, ensure_ascii=False, indent=2)
+new_html = re.sub(pattern, replacement, html, flags=re.DOTALL)
+
+with open(html_path, "w", encoding="utf-8") as f:
+    f.write(new_html)
+
+print("✅ HTML 자동 갱신 완료")
+
